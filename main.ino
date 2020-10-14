@@ -20,13 +20,14 @@ Keypad Tastenfeld = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS); 
 void trigger()
 {
 
-  delay(10);                //Warten ob weitere Tasten gedrückt wurden
-  Keyboard.releaseAll();    //Alle Tastenanschläge lösen/ausführen
-  delay(100);               //Warten bis neuer Anschlag erfolgen kann
+  delay(10);             //Warten ob weitere Tasten gedrückt wurden
+  Keyboard.releaseAll(); //Alle Tastenanschläge lösen/ausführen
+  delay(100);            //Warten bis neuer Anschlag erfolgen kann
 }
 
 void setup()
 {
+  // Sends a clean report to the host. This is important on any Arduino type.
   BootKeyboard.begin();
   Serial.begin(9600);
 }
@@ -35,80 +36,77 @@ void loop()
 {
 
   Taste = Tastenfeld.getKey(); //Mit Unter der Variablen pressedKey entspricht der gedrückten Taste
+
   if (Taste)
   { //Wenn eine Taste gedrückt wurde
+
     Serial.print("Die Taste ");
     Serial.print(Taste);
     Serial.print(" wurde gedrueckt");
     Serial.println(); //Teile uns am Serial Monitor die gedrückte Taste mit
 
-    if (Taste == '1')
+    switch (Taste)
     {
-      //Shortcut zum Einfügen
+
+    case '1':
+      break;
+
+    case '2':
+      break;
+
+    case '3':
+      break;
+
+    case 'A':   //Ausschneiden
+      Keyboard.press(KEY_LEFT_CTRL);
+      Keyboard.press('x');
+      Keyboard.releaseAll();
+      break;
+
+    case '4':
+      break;
+
+    case '5':   //Text eingeben
+      Keyboard.println("TEXT");
+      break;
+      
+    case '6':
+      break;
+
+    case 'B':
+      break;
+
+    case '7':
+      break;
+
+    case '8':
+      break;
+
+    case '9':
+      break;
+
+    case 'C':   //Kopieren
+      Keyboard.press(KEY_LEFT_CTRL);
+      Keyboard.press('c');
+      Keyboard.releaseAll();
+      break;
+
+    case '*':
+      break;
+
+    case '0':
+      break;
+
+    case '#':
+
+    case 'D':   //Einfügen
       Keyboard.press(KEY_LEFT_CTRL);
       Keyboard.press('v');
       Keyboard.releaseAll();
-    }
-    else if (Taste == '2')
-    {
-      Keyboard.releaseAll();
-    }
-    else if (Taste == '3')
-    {
-      Keyboard.releaseAll();
-    }
-    else if (Taste == 'A')
-    {
-      Keyboard.releaseAll();
-    }
-    else if (Taste == '4')
-    {
-      Keyboard.releaseAll();
-    }
-    else if (Taste == '5')
-    {
-      Keyboard.releaseAll();
-    }
-    else if (Taste == '6')
-    {
-      Keyboard.releaseAll();
-    }
-    else if (Taste == 'B')
-    {
-      Keyboard.releaseAll();
-    }
-    else if (Taste == '7')
-    {
-      Keyboard.releaseAll();
-    }
-    else if (Taste == '8')
-    {
-      Keyboard.releaseAll();
-    }
-    else if (Taste == '9')
-    {
-      Keyboard.releaseAll();
-    }
-    else if (Taste == 'C')
-    {
-      Keyboard.releaseAll();
-    }
-    else if (Taste == '*')
-    {
-      Keyboard.releaseAll();
-    }
-    else if (Taste == '0')
-    {
-      Keyboard.releaseAll();
-    }
-    else if (Taste == '#')
-    {
-      Keyboard.releaseAll();
-    }
-    else if (Taste == 'D')
-    {
-      Keyboard.releaseAll();
+      break;
+
     }
   }
+
   delay(100);
 }
